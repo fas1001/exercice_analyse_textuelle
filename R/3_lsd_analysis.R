@@ -59,6 +59,11 @@ articles_preprocessed$body_prepped <- pbapply::pbsapply(articles_preprocessed$bo
 articles_preprocessed$body_prepped <- pbapply::pbsapply(articles_preprocessed$body_prepped, LSDprep_dict)
 articles_preprocessed$body_prepped <- pbapply::pbsapply(articles_preprocessed$body_prepped, mark_proper_nouns)
 
+# Vérifier si le dossier tmp existe, sinon le créer
+if (!dir.exists("data/tmp")) {
+  dir.create("data/tmp", recursive = TRUE)
+}
+
 # Sauvegarde des données prétraitées pour éviter de refaire le prétraitement
 saveRDS(articles_preprocessed, "data/tmp/lsd_data.rds")
 
